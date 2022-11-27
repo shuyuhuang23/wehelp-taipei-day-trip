@@ -140,6 +140,8 @@ body{
 
     background: #448899;
     border-radius: 0px 5px 5px 0px;
+
+    cursor: pointer;
 }
 
 #hero-searchbar-btn>img {

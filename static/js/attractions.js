@@ -1,20 +1,30 @@
 var isLoading = false;
 var nextPage = 0;
+var keyword = '';
 
-function loadData(page) {
+function loadData(page, keyword) {
     console.log(nextPage);
 
-    if (nextPage == null) {
+    if (nextPage === null) {
 
-        return
+        return;
 
     }
-    fetch('api/attractions?page=' + page)
+    let url = `api/attractions?page=${nextPage}`
+    if (keyword !== ''){
+        url = `${url}&keyword=${keyword}`
+    }
+
+    fetch(url)
         .then(res => res.json())
         .then(result => {
             
             var anchorDiv = document.getElementById('attractions-grp');
-
+            
+            if (nextPage === 0 && result['data'].length === 0) {
+                anchorDiv.textContent = '查無景點';
+            }
+            
             for (let i = 0; i < result['data'].length; i++) {
                 let element = result['data'][i];
 
@@ -54,20 +64,38 @@ function loadData(page) {
         .catch(err => console.log(err));
 }
 
-
-window.addEventListener("load", loadData(nextPage));
+window.addEventListener("load", loadData(nextPage, keyword));
   
-
 document.addEventListener('scroll', function (event) {
 
     if (document.body.scrollHeight <= document.documentElement.scrollTop + window.innerHeight) {
 
         if (!isLoading) {
             console.log('bottom')
-            loadData(nextPage);
+            loadData(nextPage, keyword);
         }
     }
 });
+
+document.getElementById('hero-searchbar-btn').addEventListener('click', function(event) {
+    
+    let inputValue = document.getElementById('hero-searchbar-keyword').value;
+    
+    if (inputValue === '') {
+
+        return;
+
+    }
+
+    nextPage = 0;
+    keyword = inputValue;
+    let anchorDiv = document.getElementById('attractions-grp');
+    anchorDiv.innerHTML = '';
+
+    loadData(nextPage, keyword);
+    
+});
+
 // console.log(123)
 
 
