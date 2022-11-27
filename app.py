@@ -67,7 +67,8 @@ def attractions():
 				"images": item[9].split(',')
 				} for item in result]}
 
-	except:
+	except Exception as err:
+		print(str(err))
 		return {
 			"error": True,
 			"message": "伺服器內部錯誤"
@@ -102,7 +103,8 @@ def attraction(id):
 					"lng": float(result[0][8]),
 					"images": result[0][9].split(',')
 				}}
-	except:
+	except Exception as err:
+		print(str(err))
 		return {
 			"error": True,
 			"message": "伺服器內部錯誤"
@@ -119,7 +121,8 @@ def categories():
 			result = cursor.fetchall()
 
 		return {"data": [item[0] for item in result]}
-	except:
+	except Exception as err:
+		print(str(err))
 		return {
 			"error": True,
 			"message": "伺服器內部錯誤"
