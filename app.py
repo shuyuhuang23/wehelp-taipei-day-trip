@@ -3,6 +3,8 @@ import mysql.connector
 from config import mysqldb
 
 connection = mysql.connector.connect(
+	pool_name = 'mypool',
+	pool_size = 10,
 	user = mysqldb.user,
 	password = mysqldb.password,
 	host = mysqldb.host,

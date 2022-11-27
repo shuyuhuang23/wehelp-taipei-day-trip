@@ -2,15 +2,14 @@ var isLoading = false;
 var nextPage = 0;
 var keyword = '';
 
-function loadData(page, keyword) {
-    console.log(nextPage);
+function loadAttractions(page, keyword, callback) {
 
-    if (nextPage === null) {
+    if (page === null) {
 
         return;
 
     }
-    let url = `api/attractions?page=${nextPage}`
+    let url = `api/attractions?page=${page}`
     if (keyword !== ''){
         url = `${url}&keyword=${keyword}`
     }
@@ -21,7 +20,7 @@ function loadData(page, keyword) {
             
             var anchorDiv = document.getElementById('attractions-grp');
             
-            if (nextPage === 0 && result['data'].length === 0) {
+            if (page === 0 && result['data'].length === 0) {
                 anchorDiv.textContent = '查無景點';
             }
             
@@ -61,24 +60,68 @@ function loadData(page, keyword) {
             nextPage = result['nextPage'];
             isLoading = false;
         })
+        .then(() => {
+            if (callback) {
+                callback()
+            };
+        })
+        .catch(err => console.log(err));
+
+}
+
+function loadCategories() {
+
+    fetch('api/categories')
+        .then(res => res.json())
+        .then(result => {
+
+            var anchorDiv = document.getElementById('hero-searchbar-dropdown');
+
+            for (let i = 0; i < result['data'].length; i++) {
+                let catDiv = document.createElement("li");
+                catDiv.textContent = result['data'][i];
+
+                catDiv.addEventListener('click', function(event) {
+                    document.getElementById('hero-searchbar-keyword').value = catDiv.textContent;
+                })
+
+                anchorDiv.appendChild(catDiv);
+            }
+        })
         .catch(err => console.log(err));
 }
 
-window.addEventListener("load", loadData(nextPage, keyword));
+window.addEventListener("load", function (event) {
+
+    loadAttractions(nextPage, keyword, loadCategories);
+
+});
   
 document.addEventListener('scroll', function (event) {
 
     if (document.body.scrollHeight <= document.documentElement.scrollTop + window.innerHeight) {
 
         if (!isLoading) {
-            console.log('bottom')
-            loadData(nextPage, keyword);
+            loadAttractions(nextPage, keyword);
         }
     }
 });
 
+document.getElementById('hero-searchbar-keyword').addEventListener('click', function(event) {
+
+    let dropdownUl = document.getElementById('hero-searchbar-dropdown');
+    if (dropdownUl.getElementsByTagName('li').length !== 0) {
+        dropdownUl.style.visibility = "visible";
+    }
+    
+})
+            
+
 document.getElementById('hero-searchbar-btn').addEventListener('click', function(event) {
     
+    // let dropdownUl = document.getElementById('hero-searchbar-dropdown');
+    // dropdownUl.style.visibility = "hidden";
+
     let inputValue = document.getElementById('hero-searchbar-keyword').value;
     
     if (inputValue === '') {
@@ -92,10 +135,17 @@ document.getElementById('hero-searchbar-btn').addEventListener('click', function
     let anchorDiv = document.getElementById('attractions-grp');
     anchorDiv.innerHTML = '';
 
-    loadData(nextPage, keyword);
+    loadAttractions(nextPage, keyword);
     
 });
 
+document.addEventListener('click', function(event) {
+    let targetId = event.target.id;
+    if (targetId !== 'hero-searchbar-keyword' && targetId !== 'hero-searchbar') {
+        let dropdownUl = document.getElementById('hero-searchbar-dropdown');
+        dropdownUl.style.visibility = "hidden";
+    }
+})
 // console.log(123)
 
 

@@ -1,23 +1,28 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-body{
-  /* 先套用 Noto Sans TC 這個 思源黑體 */
-  font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
-  margin: 0px;
-  z-index: 1;
+
+body {
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    margin: 0px;
+    z-index: 1;
+}
+
+#navbar-wrapper {
+    position: sticky;
+    top: 0px;
+    z-index: 9998;
+    background: white;
 }
 
 #navbar {
     position: sticky;
-    /* position: fixed; */
-    /* overflow: hidden; */
     width: 1200px;
-    /* width: auto; */
-    margin: 10px auto;
+    height: 54px;
+    margin: auto;
+
     display: flex;
     justify-content: space-between;
+    align-items: center;
     top: 0;
-    /* left: 0; 
-    right: 0; */
     z-index: 999;
     background: white;
 }
@@ -45,7 +50,7 @@ body{
     font-style: normal;
     font-size: 16px;
     line-height: 13px;
-    margin-right: 20px;
+    margin: 0px 10px;
 }
 
 #hero {
@@ -54,10 +59,16 @@ body{
     height: 420px;
 }
 
-#hero>img {
+#hero-img-full {
     width: 1920px;
     height: 480px;
     clip-path: inset(0px 0px 160px 0px);
+}
+
+#hero-img-mobile {
+    display: none;
+    width: 360px;
+    height: 375;
 }
 
 #hero-slogan1 {
@@ -108,9 +119,11 @@ body{
 
     background: #FFFFFF;
     border-radius: 5px 0px 0px 5px;
+
+    box-shadow: 0px 0px 20px #AABBCC;
 }
 
-#hero-searchbar-keyword {    
+#hero-searchbar-keyword {
     position: absolute;
     width: 370px;
     height: 16px;
@@ -129,6 +142,34 @@ body{
     color: #757575;
     border: none;
 
+}
+
+#hero-searchbar-dropdown {
+    visibility: hidden;
+    width: 100%;
+    position: absolute;
+    top: 43px;
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 30px;
+    color: #757575;
+
+    padding-left: 15px;
+    padding-bottom: 9px;
+    margin: 0;
+    background-color: white;
+    box-shadow: 0px 2px 3px 0px #ccc;
+    border-radius: 0px 0px 5px 5px;
+    box-sizing: border-box;
+    overflow: auto;
+
+    list-style-type: none;
+    z-index: 10;
+
+    cursor: pointer;
 }
 
 #hero-searchbar-btn {
@@ -196,7 +237,9 @@ body{
 
     font-family: 'Noto Sans TC';
     font-style: normal;
+    font-weight: 700;
     font-size: 16px;
+    line-height: 13px;
 
     display: flex;
     align-items: center;
@@ -235,9 +278,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* width: 1920px; */
     margin-top: 95px;
-    /* padding: 40px auto; */
     padding-top: 40px;
     padding-bottom: 40px;
 
@@ -248,7 +289,6 @@ body{
 #footer>div {
     font-family: 'Noto Sans TC';
     font-style: normal;
-    /* width: 234px; */
     height: 14px;
     font-weight: 700;
     font-size: 16px;
@@ -260,64 +300,81 @@ body{
 @media (max-width: 360px) {
 
     #navbar {
-        position: sticky;
         width: 360px;
-        margin: 10px auto;
-        display: flex;
-        justify-content: space-between;
-        top: 0;
-        left: 0; 
-        right: 0;
-    }
-    
-    #hero {
-        position: relative;
-        width: 360px;
-        height: 420px;
     }
 
-    #hero>img {
+    #hero {
         width: 360px;
-        height: 480px;
-        /* clip-path: inset(0px 0px 160px 0px); */
+    }
+
+    #hero-img-full {
+        display: none;
+    }
+
+    #hero-img-mobile {
+        display: block;
     }
 
     #hero-slogan1 {
-        position: absolute;
-        /* width: 1180px; */
-        height: 41px;
-        left: 70px;
-        top: 85px;
-    
-        font-family: 'Noto Sans TC';
-        font-style: normal;
-        font-weight: 700;
+        width: 320px;
+        left: 20px;
+        top: 86px;
+
         font-size: 28px;
         line-height: 24px;
-    
-        display: flex;
-        align-items: center;
-    
-        color: #F8F8F8;
-        text-shadow: 0px 0px 30px #AABBCC;
     }
-    
+
     #hero-slogan2 {
-        position: absolute;
-        /* width: 1180px; */
-        height: 22px;
-        left: 70px;
-        top: 141px;
-    
-        font-family: 'Noto Sans TC';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 13px;
-    
-        display: flex;
-        align-items: center;
-    
-        color: #F8F8F8;
+        width: 320px;
+        left: 20px;
+        top: 142px;
     }
+
+    #hero-searchbar {
+        width: 230px;
+        height: 46px;
+        left: 20px;
+        top: 189px;
+    }
+
+    #hero-searchbar-keyword {
+        position: absolute;
+        width: 195px;
+        height: 16px;
+        left: 15px;
+        top: 15px;
+    }
+
+    #hero-searchbar-btn {
+        width: 60px;
+        height: 46px;
+        left: 230px;
+        top: 0px;
+    }
+
+    #attractions-grp {
+        /* width: 352px; */
+        top: 0px;
+        display: block;
+    }
+
+    .attraction {
+        width: 322px;
+        height: 280px;
+        margin: 0px 19px 15px 19px;
+    }
+
+    .attraction>img {
+        width: 322px;
+        height: 235px;
+    }
+
+    .attraction-name {
+        width: 322px;
+    }
+
+    #footer {
+        display: none;
+    }
+
 }
