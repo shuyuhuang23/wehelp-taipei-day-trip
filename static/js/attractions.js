@@ -58,11 +58,11 @@ function loadAttractions(page, keyword, callback) {
                 anchorDiv.appendChild(attractionDiv);
             }
             nextPage = result['nextPage'];
-            isLoading = false;
         })
         .then(() => {
             if (callback) {
-                callback()
+                callback();
+                isLoading = false;
             };
         })
         .catch(err => console.log(err));
