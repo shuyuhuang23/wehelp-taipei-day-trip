@@ -78,7 +78,8 @@ function loadCategories() {
             var anchorDiv = document.getElementById('hero-searchbar-dropdown');
 
             for (let i = 0; i < result['data'].length; i++) {
-                let catDiv = document.createElement("li");
+                let catDiv = document.createElement("div");
+                catDiv.className = 'hero-searchbar-dropdown-option';
                 catDiv.textContent = result['data'][i];
 
                 catDiv.addEventListener('click', function(event) {
@@ -110,7 +111,10 @@ document.addEventListener('scroll', function (event) {
 document.getElementById('hero-searchbar-keyword').addEventListener('click', function(event) {
 
     let dropdownUl = document.getElementById('hero-searchbar-dropdown');
-    if (dropdownUl.getElementsByTagName('li').length !== 0) {
+    // if (dropdownUl.getElementsByTagName('li').length !== 0) {
+    //     dropdownUl.style.visibility = "visible";
+    // }
+    if (dropdownUl.getElementsByTagName('div').length !== 0) {
         dropdownUl.style.visibility = "visible";
     }
     
