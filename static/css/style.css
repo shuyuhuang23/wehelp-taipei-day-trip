@@ -36,7 +36,7 @@ body {
     color: #448899;
     width: 150px;
     height: 34px;
-    padding-left: 12px;
+    /* padding-left: 12px; */
 }
 
 #navbar-menu {
@@ -56,6 +56,8 @@ body {
     position: relative;
     max-width: 100%;
     height: 420px;
+    display: flex;
+    justify-content: center;
 }
 
 .hero-img {
@@ -77,8 +79,9 @@ body {
 
 #hero-slogan1 {
     position: absolute;
+    width: 1200px;
     height: 41px;
-    left: 370px;
+    /* left: 370px; */
     top: 85px;
 
     font-family: 'Noto Sans TC';
@@ -96,8 +99,9 @@ body {
 
 #hero-slogan2 {
     position: absolute;
+    width: 1200px;
     height: 22px;
-    left: 370px;
+    /* left: 370px; */
     top: 141px;
 
     font-family: 'Noto Sans TC';
@@ -112,11 +116,16 @@ body {
     color: #F8F8F8;
 }
 
+#hero-searchbar-wrapper {
+    position: absolute;
+    width: 1200px;
+}
+
 #hero-searchbar {
     position: absolute;
     width: 400px;
     height: 46px;
-    left: 370px;
+    /* left: 370px; */
     top: 188px;
 
     background: #FFFFFF;
@@ -317,7 +326,7 @@ body {
     color: #FFFFFF;
 }
 
-@media(max-width: 1159px) {
+@media(max-width: 1199px) {
     #navbar {
         width: auto;
     }
@@ -326,16 +335,11 @@ body {
         width: 100%;
     }
 
-    #hero-slogan1 {
-        left: 20%;
-    }
-
-    #hero-slogan2 {
-        left: 20%;
-    }
-
-    #hero-searchbar {
-        left: 20%;
+    #hero-slogan1, 
+    #hero-slogan2,
+    #hero-searchbar-wrapper  {
+        width: 90%;
+        left: 10%;
     }
 
     #attractions-grp {
@@ -356,18 +360,20 @@ body {
         grid-template-columns: 270px;
     }
 
-    #hero-slogan1 {
+    /* #hero-slogan1 {
+        width: 88%;
         left: 12%;
     }
 
     #hero-slogan2 {
+        width: 88%;
         left: 12%;
-    }
+    } */
 
     #hero-searchbar {
         width: 300px;
-        left: 12%;
-    }
+        /* left: 12%; */
+    } 
 
     #hero-searchbar-keyword {
         width: 270px;
@@ -399,10 +405,11 @@ body {
     #hero-slogan2 {
         left: 10%;
     }
-
+    #hero-searchbar-wrapper {
+        left: 10%
+    }
     #hero-searchbar {
         width: 250px;
-        left: 10%;
     }
 
     #hero-searchbar-keyword {
