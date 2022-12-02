@@ -27,6 +27,9 @@ function loadAttractions(page, keyword, callback) {
             for (let i = 0; i < result['data'].length; i++) {
                 let element = result['data'][i];
 
+                let linkTag = document.createElement('a');
+                linkTag.setAttribute('href', `/attraction/${element['id']}`);
+
                 let attractionDiv = document.createElement("div");
                 attractionDiv.className = 'attraction';
 
@@ -55,7 +58,8 @@ function loadAttractions(page, keyword, callback) {
                 attractionDiv.appendChild(nameDiv);
                 attractionDiv.appendChild(detailsDiv);
 
-                anchorDiv.appendChild(attractionDiv);
+                linkTag.appendChild(attractionDiv);
+                anchorDiv.appendChild(linkTag);
             }
             nextPage = result['nextPage'];
         })

@@ -36,7 +36,7 @@ body {
     color: #448899;
     width: 150px;
     height: 34px;
-    padding-left: 7px;
+    padding-left: 12px;
 }
 
 #navbar-menu {
@@ -218,6 +218,10 @@ body {
     justify-content: center;
 }
 
+#attractions-grp>a {
+    text-decoration: none;
+}
+
 .attraction {
     width: 270px;
     height: 242px;
@@ -313,7 +317,7 @@ body {
     color: #FFFFFF;
 }
 
-@media(max-width: 1200px) {
+@media(max-width: 1159px) {
     #navbar {
         width: auto;
     }

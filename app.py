@@ -2,13 +2,16 @@ from flask import *
 import mysql.connector
 from config import mysqldb
 
-connection = mysql.connector.connect(
-	pool_name = 'mypool',
-	pool_size = 10,
-	user = mysqldb.user,
-	password = mysqldb.password,
-	host = mysqldb.host,
-	database = mysqldb.database)
+try:
+	connection = mysql.connector.connect(
+		pool_name = 'mypool',
+		pool_size = 5,
+		user = mysqldb.user,
+		password = mysqldb.password,
+		host = mysqldb.host,
+		database = mysqldb.database)
+except Exception as err:
+	print(str(err))
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -20,6 +23,10 @@ PER_PAGE = 12
 @app.route("/")
 def index():
 	return render_template("index.html")
+
+@app.route("/attraction/<id>")
+def show_attraction(id):
+	return render_template("attraction.html")
 
 # get all attractions with pagination and keyword search feature
 @app.route("/api/attractions")

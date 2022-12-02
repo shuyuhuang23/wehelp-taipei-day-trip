@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/attraction.css') }}" />
+    <script defer src="{{ url_for('static', filename='js/attraction.js') }}"></script>
+
+
+    <script>
+        function chooseTime() {
+            let tourDivSpan = document.getElementById("profile-content-tour").getElementsByTagName('span')[0];
+            if (document.getElementById('time-am').checked) {
+                tourDivSpan.textContent = '新台幣 2000 元';
+            } else if (document.getElementById('time-pm').checked) {
+                tourDivSpan.textContent = '新台幣 2500 元';
+            }
+        }
+
+    </script>
+    <title>台北一日遊</title>
+
+</head>
+
+<body>
+    <div id="navbar-wrapper">
+        <div id="navbar">
+            <a href="/" style="text-decoration:none">
+                <div id="navbar-title">
+                    台北一日遊
+                </div>
+            </a>
+            <div id="navbar-menu">
+                <div>預定行程</div>
+                <div>登入/註冊</div>
+            </div>
+        </div>
+    </div>
+    <div id="profile-container">
+        <div id="profile-slideshow">
+            <div class="profile-slideshow-slide fade">
+            </div>
+
+            <div class="profile-slideshow-arrow">
+                <img id="profile-slideshow-prev" src="{{ url_for('static', filename='images/btn_leftArrow.png') }}">
+                <img id="profile-slideshow-next" src="{{ url_for('static', filename='images/btn_rightArrow.png') }}">
+            </div>
+            <div class="profile-slideshow-bottom">
+            </div>
+        </div>
+        <div id="profile-content">
+            <div id="profile-content-title"></div>
+            <div id="profile-content-detail"></div>
+            <div id="profile-content-booking">
+                <div id="profile-content-booking-title"></div>
+                <div id="profile-content-booking-desc">以此景點為中心的一日行程，帶您探索城市角落故事</div>
+                <div id="profile-content-date">
+                    <div id="profile-content-date-title">選擇日期：</div>
+                    <div id="profile-content-date-input-bg"></div>
+                    <input type="date" id="profile-content-date-input-box" placeholder="yyyy/mm/dd">
+                </div>
+                <div id="profile-content-time">
+                    <div id="profile-content-time-title">選擇時間：</div>
+                    <input type="radio" value="am" name='time' id='time-am' onclick="chooseTime();" checked />
+                    <label for="am">上半天</label>
+                    <input type="radio" value="pm" name='time' id='time-pm' onclick="chooseTime();" />
+                    <label for="pm">下半天</label>
+                </div>
+                <div id="profile-content-tour">導覽費用：<span>新台幣 2000 元</span></div>
+                <div id="profile-content-btn">
+                    <div>開始預約行程</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div id="description"></div>
+    <div id="location-title">景點地址：</div>
+    <div id="location-content"></div>
+    <div id="transportation-title">交通方式：</div>
+    <div id="transportation-content"></div> 
+
+    <div id="footer">
+        <div>COPYRIGHT © 2021 台北一日遊</div>
+    </div>
+
+</body>
+
+</html>
