@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <script src="static/js/attractions.js" async></script>
+    <title>台北一日遊</title>
+
+</head>
+
+<body>
+    <div id="navbar-wrapper">
+        <div id="navbar">
+            <a href="/" style="text-decoration:none">
+                <div id="navbar-title">
+                    台北一日遊
+                </div>
+            </a>
+            <div id="navbar-menu">
+                <div>預定行程</div>
+                <div>登入/註冊</div>
+            </div>
+        </div>
+    </div>
+    <div id="hero">
+        <div class="hero-img">
+            <img src="static/images/welcome_desktop.png" id="hero-img-full">
+            <img src="static/images/welcome_mobile.png" id="hero-img-mobile">
+        </div>
+        <div id="hero-slogan1">輕鬆享受台北一日悠閒</div>
+        <div id="hero-slogan2">探索每個角落，體驗城市的深度旅遊行程</div>
+
+        <div id="hero-searchbar-wrapper">
+            <div id="hero-searchbar">
+                <input type="text" id="hero-searchbar-keyword" placeholder="請輸入景點名稱查詢">
+                <div id="hero-searchbar-dropdown">
+                </div>
+
+                <div id="hero-searchbar-btn">
+                    <img src="static/images/icon_search.png">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="attractions-grp">
+
+    </div>
+
+    <div id="footer">
+        <div>COPYRIGHT © 2021 台北一日遊</div>
+    </div>
+
+</body>
+
+</html>

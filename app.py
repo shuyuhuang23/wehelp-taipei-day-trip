@@ -2,11 +2,16 @@ from flask import *
 import mysql.connector
 from config import mysqldb
 
-connection = mysql.connector.connect(
-	user = mysqldb.user,
-	password = mysqldb.password,
-	host = mysqldb.host,
-	database = mysqldb.database)
+try:
+	connection = mysql.connector.connect(
+		pool_name = 'mypool',
+		pool_size = 5,
+		user = mysqldb.user,
+		password = mysqldb.password,
+		host = mysqldb.host,
+		database = mysqldb.database)
+except Exception as err:
+	print(str(err))
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -18,6 +23,10 @@ PER_PAGE = 12
 @app.route("/")
 def index():
 	return render_template("index.html")
+
+@app.route("/attraction/<id>")
+def show_attraction(id):
+	return render_template("attraction.html")
 
 # get all attractions with pagination and keyword search feature
 @app.route("/api/attractions")
@@ -67,7 +76,8 @@ def attractions():
 				"images": item[9].split(',')
 				} for item in result]}
 
-	except:
+	except Exception as err:
+		print(str(err))
 		return {
 			"error": True,
 			"message": "伺服器內部錯誤"
@@ -102,7 +112,8 @@ def attraction(id):
 					"lng": float(result[0][8]),
 					"images": result[0][9].split(',')
 				}}
-	except:
+	except Exception as err:
+		print(str(err))
 		return {
 			"error": True,
 			"message": "伺服器內部錯誤"
@@ -119,7 +130,8 @@ def categories():
 			result = cursor.fetchall()
 
 		return {"data": [item[0] for item in result]}
-	except:
+	except Exception as err:
+		print(str(err))
 		return {
 			"error": True,
 			"message": "伺服器內部錯誤"
@@ -135,5 +147,4 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
-
-app.run(port = 3000)
+app.run(host = '0.0.0.0', port = 3000)
