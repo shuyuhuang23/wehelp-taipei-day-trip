@@ -109,7 +109,7 @@
 }
 
 #profile-content-booking-desc {
-    padding: 0px 0px 0px 20px;
+    padding: 0px 20px 0px 20px;
 
     height: 24px;
     font-weight: 500;
@@ -271,74 +271,25 @@ hr {
 }
 
 @media (max-width: 1200px) {
-    /* #profile-container {
-        display: block;
-        justify-content: center;
-        margin-top: 0px;
-    } */
 
-    /* #profile-slideshow {
-        width: 360px;
-        height: 350px;
-        border-radius: 0px;
-        margin-right: 0px;
-    } */
-
-    .profile-slideshow-slide>img {
-        margin-left: 10px;
+    .profile-slideshow-arrow {
+        width: calc(50% - 63px);
     }
 
-    /* .profile-slideshow-arrow {
-        top: 211px;
-        width: 340px;
-    } */
-
-    /* .profile-slideshow-bottom {
-        top: 382px;
-        width: 360px;
-    } */
-
-    /* #profile-content {
-        width: 360px;
-    } */
-
-    /* #profile-content-title {
-        margin: 20px 10px 15px 10px;
-    } */
-
-    /* #profile-content-detail {
-        margin: 0px 10px 20px 10px;
-    } */
+    .profile-slideshow-bottom {
+        width: calc(50% - 10px);
+    }
 
     #profile-content-booking {
-        /* height: 300px; */
         width: calc(100% - 10px);
-        /* margin: auto; */
     }
-
-    /* #profile-content-booking-desc {
-        padding: 0px 20px 0px 20px;
-
-        height: auto;
-    } */
-
-    /* #profile-content-time>label {
-        margin-right: 4px;
-    } */
-
-    /* #profile-content-tour {
-        padding: 0px;
-        margin: 15px 0px 25px 20px;
-    } */
 
     hr {
         width: calc(100% - 20px);
-        /* margin: 40px auto 50px auto; */
     }
 
     #description {
         width: calc(100% - 20px);
-        /* margin: 0 auto 20px auto; */
     }
 
     #location-title,
@@ -348,102 +299,95 @@ hr {
         width: calc(100% - 20px);
     }
 
-    /* #location-content,
+}
+
+@media (max-width: 650px) {
+    #profile-container {
+        display: block;
+        justify-content: center;
+        margin-top: 0px;
+    }
+
+    #profile-slideshow {
+        width: 360px;
+        height: 350px;
+        border-radius: 0px;
+        margin: 0px auto;
+    }
+
+    .profile-slideshow-slide>img {
+        width: 360px;
+        height: 350px;
+        border-radius: 0px;
+    }
+
+    .profile-slideshow-arrow {
+        top: 211px;
+        width: 340px;
+    }
+
+    .profile-slideshow-bottom {
+        top: 382px;
+        width: 360px;
+    }
+
+    #profile-content {
+        width: 360px;
+        margin: auto;
+    }
+
+    #profile-content-title {
+        margin: 20px 10px 15px 10px;
+    }
+
+    #profile-content-detail {
+        margin: 0px 10px 20px 10px;
+    }
+
+    #profile-content-booking {
+        height: 300px;
+        width: 340px;
+        margin: auto;
+    }
+
+    #profile-content-booking-desc {
+        padding: 0px 20px 0px 20px;
+
+        height: auto;
+    }
+
+    #profile-content-time>label {
+        margin-right: 4px;
+    }
+
+    #profile-content-tour {
+        padding: 0px;
+        margin: 15px 0px 25px 20px;
+    }
+
+    hr {
+        width: 340px;
+        margin: 40px auto 50px auto;
+    }
+
+    #description {
+        width: 330px;
+        margin: 0 auto 20px auto;
+    }
+
+    #location-title,
+    #transportation-title {
+        width: 330px;
+    }
+
+    #location-content,
     #transportation-content {
         width: 330px;
-    } */
+    }
 
-    /* #footer {
+    #footer {
         display: flex;
         margin-top: 134px;
-    } */
-}
-    @media (max-width: 360px) {
-        #profile-container {
-            display: block;
-            justify-content: center;
-            margin-top: 0px;
-        }
-
-        #profile-slideshow {
-            width: 360px;
-            height: 350px;
-            border-radius: 0px;
-            margin-right: 0px;
-        }
-
-        .profile-slideshow-slide>img {
-            width: 360px;
-            height: 350px;
-            border-radius: 0px;
-        }
-
-        .profile-slideshow-arrow {
-            top: 211px;
-            width: 340px;
-        }
-
-        .profile-slideshow-bottom {
-            top: 382px;
-            width: 360px;
-        }
-
-        #profile-content {
-            width: 360px;
-        }
-
-        #profile-content-title {
-            margin: 20px 10px 15px 10px;
-        }
-
-        #profile-content-detail {
-            margin: 0px 10px 20px 10px;
-        }
-
-        #profile-content-booking {
-            height: 300px;
-            width: 340px;
-            margin: auto;
-        }
-
-        #profile-content-booking-desc {
-            padding: 0px 20px 0px 20px;
-
-            height: auto;
-        }
-
-        #profile-content-time>label {
-            margin-right: 4px;
-        }
-
-        #profile-content-tour {
-            padding: 0px;
-            margin: 15px 0px 25px 20px;
-        }
-
-        hr {
-            width: 340px;
-            margin: 40px auto 50px auto;
-        }
-
-        #description {
-            width: 330px;
-            margin: 0 auto 20px auto;
-        }
-
-        #location-title,
-        #transportation-title {
-            width: 330px;
-        }
-
-        #location-content,
-        #transportation-content {
-            width: 330px;
-        }
-
-        #footer {
-            display: flex;
-            margin-top: 134px;
-        }
-
     }
+
+}
