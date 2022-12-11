@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script defer src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    {% block head_script %}
+    {% endblock %}
+    <title>台北一日遊</title>
+    
+</head>
+
+<body>
+
+    <div id="navbar-wrapper">
+        <div id="navbar">
+            <a href="/" style="text-decoration:none">
+                <div id="navbar-title">
+                    台北一日遊
+                </div>
+            </a>
+            <div id="navbar-menu">
+                <div>預定行程</div>
+                <div id="navbar-login"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-container">
+        <div class="login-register-bar"></div>
+        <div class="login-register-close" id="login-close">
+            <img src="{{ url_for('static', filename='images/icon_close.png') }}" />
+        </div>
+        <div id="login-title">登入會員帳號</div>
+        <div>
+            <input type="email" class="login-form" id="login-email" placeholder="輸入電子信箱" required>
+        </div>
+        <div>
+            <input type="password" class="login-form" id="login-password" placeholder="輸入密碼" required>
+        </div>
+        <div id="login-submit">登入帳戶</div>
+        <div id="login-msg"></div>
+        <div id="login-signup">還沒有帳戶？<p id="login-register">點此註冊</p>
+        </div>
+    </div>
+
+    <div id="register-container">
+        <div class="login-register-bar"></div>
+        <div class="login-register-close" id="register-close">
+            <img src="{{ url_for('static', filename='images/icon_close.png') }}" />
+        </div>
+        <div id="register-title">註冊會員帳號</div>
+        <div>
+            <input type="text" class="register-form" id="register-name" placeholder="輸入姓名" required>
+        </div>
+        <div>
+            <input type="email" class="register-form" id="register-email" placeholder="輸入電子信箱" required>
+        </div>
+        <div>
+            <input type="password" class="register-form" id="register-password" placeholder="輸入密碼" required>
+        </div>
+        <div id="register-submit">註冊新帳戶</div>
+        <div id="register-msg"></div>
+        <div id="register-signin">已經有帳戶了？<p id="register-login">點此登入</p>
+        </div>
+    </div>
+    {% block body %}
+    {% endblock %}
+
+    <div id="footer">
+        <div>COPYRIGHT © 2021 台北一日遊</div>
+    </div>
+
+</body>
+
+</html>

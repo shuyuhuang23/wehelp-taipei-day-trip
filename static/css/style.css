@@ -52,6 +52,10 @@ body {
     margin: 0px 10px;
 }
 
+#navbar-login {
+    cursor: pointer;
+}
+
 #hero {
     position: relative;
     max-width: 100%;
@@ -150,7 +154,6 @@ body {
     display: flex;
     align-items: center;
 
-    /* color: #757575; */
     color: black;
     border: none;
 
@@ -167,7 +170,7 @@ body {
     box-shadow: 0px 0px 20px #AABBCC;
     border-radius: 5px;
 
-    
+
     display: grid;
     grid-template-columns: 120px 120px 120px;
     grid-gap: 0px 0px;
@@ -215,6 +218,142 @@ body {
     height: 30px;
     left: 15px;
     top: 8px;
+}
+
+#login-container,
+#register-container {
+    display: none;
+    position: absolute;
+    width: 340px;
+    height: 275px;
+    top: 80px;
+    margin: 0px calc(50% - 170px);
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+
+    z-index: 10;
+}
+
+.login-register-close>img {
+    position: absolute;
+    top: 27px;
+    right: 17px;
+    width: 16px;
+    height: 16px;
+}
+
+.login-register-bar {
+    height: 10px;
+    border-radius: 6px 6px 0px 0px;
+
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+
+#login-title,
+#register-title {
+    height: 27px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Noto Sans TC';
+    font-weight: 700;
+    font-size: 24px;
+    color: #666666;
+}
+
+.login-form,
+.register-form {
+    width: 310px;
+    height: 47px;
+    margin: 0px 15px;
+    justify-content: center;
+    background: #FFFFFF;
+
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    padding: 15px;
+
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13px;
+
+    color: #757575;
+}
+
+#login-password {
+    margin: 10px 15px;
+}
+
+#login-submit,
+#register-submit {
+    width: 310px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+
+    background: #448899;
+    border-radius: 5px;
+
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 16px;
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
+
+#login-msg,
+#register-msg {
+    position: absolute;
+    top: 226px;
+    left: 15px;
+    font-size: 10px;
+
+    color: red;
+}
+
+#login-signup,
+#register-signin {
+    width: 310px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+}
+
+#login-register,
+#register-login {
+    cursor: pointer;
+}
+
+#register-container {
+    height: 332px;
+}
+
+#register-email,
+#register-password {
+    margin: 10px 15px 0px 15px;
+}
+
+#register-submit {
+    margin-top: 10px;
+}
+
+#register-msg {
+    top: 283px;
 }
 
 #attractions-grp {
@@ -335,9 +474,9 @@ body {
         width: 100%;
     }
 
-    #hero-slogan1, 
+    #hero-slogan1,
     #hero-slogan2,
-    #hero-searchbar-wrapper  {
+    #hero-searchbar-wrapper {
         width: 90%;
         left: 10%;
     }
@@ -373,7 +512,7 @@ body {
     #hero-searchbar {
         width: 300px;
         /* left: 12%; */
-    } 
+    }
 
     #hero-searchbar-keyword {
         width: 270px;
@@ -383,6 +522,7 @@ body {
         width: 322px;
         grid-template-columns: 96px 96px 96px;
     }
+
     #hero-searchbar-dropdown>div {
         height: 20px;
         padding: 10px 15px;
@@ -405,9 +545,11 @@ body {
     #hero-slogan2 {
         left: 10%;
     }
+
     #hero-searchbar-wrapper {
         left: 10%
     }
+
     #hero-searchbar {
         width: 250px;
     }

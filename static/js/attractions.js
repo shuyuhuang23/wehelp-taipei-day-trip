@@ -2,28 +2,43 @@ var isLoading = false;
 var nextPage = 0;
 var keyword = '';
 
+function identifyAuth(callback) {
+    return fetch('api/user/auth')
+        .then((response) => response.json())
+        .then((data) => {
+            let navbarDiv = document.getElementById('navbar-login');
+            if ('email' in data['data']) {
+                navbarDiv.innerText = '登出系統';
+            } else {
+                navbarDiv.innerText = '登入/註冊';
+            }
+            return data
+        })
+        .catch(err => console.log(err));
+};
+
 function loadAttractions(page, keyword, callback) {
 
     if (page === null) {
-
         return;
-
     }
+
+    isLoading = true;
+
     let url = `api/attractions?page=${page}`
-    if (keyword !== ''){
+    if (keyword !== '') {
         url = `${url}&keyword=${keyword}`
     }
 
-    fetch(url)
+    return fetch(url)
         .then(res => res.json())
         .then(result => {
-            
             var anchorDiv = document.getElementById('attractions-grp');
-            
+
             if (page === 0 && result['data'].length === 0) {
                 anchorDiv.textContent = '查無景點';
             }
-            
+
             for (let i = 0; i < result['data'].length; i++) {
                 let element = result['data'][i];
 
@@ -62,23 +77,20 @@ function loadAttractions(page, keyword, callback) {
                 anchorDiv.appendChild(linkTag);
             }
             nextPage = result['nextPage'];
+            isLoading = false;
         })
-        .then(() => {
-            if (callback) {
-                callback();
-                isLoading = false;
-            };
-        })
-        .catch(err => console.log(err));
+        .catch(err => {
+            isLoading = false;
+            console.log(err);
+        });
 
-}
+};
 
-function loadCategories() {
+function loadCategories(callback) {
 
-    fetch('api/categories')
+    return fetch('api/categories')
         .then(res => res.json())
         .then(result => {
-
             var anchorDiv = document.getElementById('hero-searchbar-dropdown');
 
             for (let i = 0; i < result['data'].length; i++) {
@@ -86,7 +98,7 @@ function loadCategories() {
                 catDiv.className = 'hero-searchbar-dropdown-option';
                 catDiv.textContent = result['data'][i];
 
-                catDiv.addEventListener('click', function(event) {
+                catDiv.addEventListener('click', function (event) {
                     document.getElementById('hero-searchbar-keyword').value = catDiv.textContent;
                 })
 
@@ -94,14 +106,18 @@ function loadCategories() {
             }
         })
         .catch(err => console.log(err));
-}
+};
 
 window.addEventListener("load", function (event) {
-
-    loadAttractions(nextPage, keyword, loadCategories);
-
+    identifyAuth()
+        .then(() => {
+            return loadAttractions(nextPage, keyword);
+        })
+        .then(() => {
+            return loadCategories();
+        })
 });
-  
+
 document.addEventListener('scroll', function (event) {
 
     if (document.body.scrollHeight <= document.documentElement.scrollTop + window.innerHeight) {
@@ -112,30 +128,23 @@ document.addEventListener('scroll', function (event) {
     }
 });
 
-document.getElementById('hero-searchbar-keyword').addEventListener('click', function(event) {
+document.getElementById('hero-searchbar-keyword').addEventListener('click', function (event) {
 
     let dropdownUl = document.getElementById('hero-searchbar-dropdown');
-    // if (dropdownUl.getElementsByTagName('li').length !== 0) {
-    //     dropdownUl.style.visibility = "visible";
-    // }
+
     if (dropdownUl.getElementsByTagName('div').length !== 0) {
         dropdownUl.style.visibility = "visible";
     }
-    
-})
-            
 
-document.getElementById('hero-searchbar-btn').addEventListener('click', function(event) {
-    
-    // let dropdownUl = document.getElementById('hero-searchbar-dropdown');
-    // dropdownUl.style.visibility = "hidden";
+});
+
+
+document.getElementById('hero-searchbar-btn').addEventListener('click', function (event) {
 
     let inputValue = document.getElementById('hero-searchbar-keyword').value;
-    
+
     if (inputValue === '') {
-
         return;
-
     }
 
     nextPage = 0;
@@ -144,85 +153,13 @@ document.getElementById('hero-searchbar-btn').addEventListener('click', function
     anchorDiv.innerHTML = '';
 
     loadAttractions(nextPage, keyword);
-    
+
 });
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     let targetId = event.target.id;
     if (targetId !== 'hero-searchbar-keyword' && targetId !== 'hero-searchbar') {
         let dropdownUl = document.getElementById('hero-searchbar-dropdown');
         dropdownUl.style.visibility = "hidden";
     }
-})
-// console.log(123)
-
-
-// class Attraction extends React.Component {
-//     render() {
-//         return <div class="attraction">
-//             <img src="https:\/\/www.travel.taipei\/d_upload_ttn\/sceneadmin\/pic\/11002891.jpg"/>
-//                 <div class="attraction-name">
-//                     <div>this.props.name</div>
-//                 </div>
-//                 <div class="attraction-details">
-//                     <div class="attraction-details-info">this.props.mrt</div>
-//                     <div class="attraction-details-info">{this.props.category}</div>
-//                 </div>
-//         </div>
-
-//     }
-// }
-
-
-
-// if (document.readyState === "complete") {
-//     console.log(document.getElementById('attractions-grp'));
-//         // ReactDOM.render(<Attraction/>, document.getElementById("attractions-grp"));
-//   } else {
-//     // window.addEventListener('load', handler);
-//     // return () => document.removeEventListener('load', handler);
-
-//     window.addEventListener("load", () => {
-//         // ReactDOM.render(<Switch />, document.body);
-        
-
-//         fetch('api/attractions?page=0')
-//         .then(res => res.json())
-//         .then(result => {
-
-//             // console.log(result);
-//             let anchorDiv = document.getElementById('attractions-grp');
-
-//             // console.log(anchorDiv)
-//         })
-//         .catch(err => console.log(err));
-//         console.log(document.getElementById('attractions-grp'));
-//         ReactDOM.render(<Attraction/>, document.getElementById("attractions-grp"));
-//         // ReactDOM.render(<Switch/>, document.getElementById("switch-1"));
-//     })
-//   }
-
-
-// class Switch extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = { on: false };
-//     }
-//     render() {
-//         let className = "switch";
-//         if (this.state.on) {
-//             className += " switch-on";
-//         }
-//         return <div onClick={this.update.bind(this)} className={className}>
-//             <div className="btn"></div>
-//         </div>
-//     }
-//     update() {
-//         this.setState((currentState) => ({ on: !currentState.on }));
-//     }
-// }
-// window.addEventListener("load", () => {
-//     // ReactDOM.render(<Switch />, document.body);
-//     ReactDOM.render(<Switch/>, document.getElementById("switch-0"));
-//     ReactDOM.render(<Switch/>, document.getElementById("switch-1"));
-// })
+});
