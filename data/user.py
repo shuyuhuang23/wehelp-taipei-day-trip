@@ -8,7 +8,7 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.join(BASE_PATH, 'config'))
 import mysqldb
 
-val = [('彭彭', 'peng@mail.com', 'wehelp'), ('user', 'user@mail.com', 'user')]
+# val = [('彭彭', 'peng@mail.com', 'wehelp'), ('user', 'user@mail.com', 'user')]
 
 with mysql.connector.connect(
     user = mysqldb.user, 
@@ -31,15 +31,15 @@ with mysql.connector.connect(
     with connection.cursor() as cursor:
         cursor.execute(create_db_query)
     
-    insert_db_query = '''INSERT INTO users 
-        (
-            `name`,
-            email,
-            password
-        ) VALUES (%s, %s, %s)
-    '''
-    with connection.cursor() as cursor:
-        cursor.executemany(insert_db_query, val)
-        connection.commit()
+    # insert_db_query = '''INSERT INTO users 
+    #     (
+    #         `name`,
+    #         email,
+    #         password
+    #     ) VALUES (%s, %s, %s)
+    # '''
+    # with connection.cursor() as cursor:
+    #     cursor.executemany(insert_db_query, val)
+    #     connection.commit()
     
 
