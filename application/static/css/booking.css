@@ -1,0 +1,257 @@
+#headline {
+    margin: 46px 0px 0px calc(50% - 400px);
+
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 16px;
+
+    color: #666666;
+}
+
+#booking-wrapper {
+    display: flex;
+    margin: 35px 0px 0px calc(50% - 400px);
+}
+
+#booking-img {
+    width: 266px;
+    height: 200px;
+    margin-right: 22px;
+}
+
+#booking-img>img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#booking-info-title {
+    margin: 5px 0px 10px 0px;
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #448899;
+
+}
+
+.booking-info-detail {
+    margin-top: 20px;
+    font-weight: 500;
+
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+}
+
+#booking-delete {
+    position: absolute;
+    top: 151px;
+    right: calc(50% - 490px);
+    width: 30px;
+    height: 30px;
+
+}
+
+hr {
+    /* width: 1200px; */
+    width: min(1200px, 100% - 20px);
+    margin: 40px auto 44px auto;
+    border: 1px solid #E8E8E8;
+}
+
+#contact-wrapper,
+#payment-wrapper {
+    margin-left: calc(50% - 400px);
+}
+
+#contact-title,
+#payment-title {
+    margin-bottom: 2px;
+
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 16px;
+
+    color: #666666;
+}
+
+.contact-form-label,
+.payment-form-label {
+    margin-top: 29px;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #666666;
+}
+
+.contact-form,
+.payment-form,
+#payment-expire-wrapper {
+    width: 180px;
+    height: 18px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    padding: 10px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #000000;
+
+}
+
+#payment-expire-wrapper {
+    display: flex;
+}
+
+#payment-expire-wrapper>div {
+    color: grey;
+}
+
+.payment-form-expire {
+    width: 28px;
+
+    border: none;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #000000;
+}
+
+#contact-notes {
+    margin: 27px 0px 5px 0px;
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #666666;
+}
+
+#booking-confirm {
+    margin-right: calc(50% - 490px);
+
+    display: flex;
+    align-items: flex-end;
+
+    flex-direction: column;
+}
+
+#booking-total-amount {
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #666666;
+}
+
+#booking-submit {
+    width: 133px;
+    height: 16px;
+
+    padding: 10px 20px;
+
+    background: #448899;
+    border-radius: 5px;
+
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 16px;
+
+    color: #FFFFFF;
+}
+
+@media (max-width: 1000px) {
+    #booking-delete {
+        right: 10px;
+    }
+    #booking-confirm {
+        margin-right: 10px;
+    }
+
+}
+
+@media (max-width: 830px) {
+    #headline {
+        width: 340px;
+        margin: 46px auto 0px auto;
+    }
+
+    #booking-wrapper {
+        display: block;
+        margin: 7px auto 0px auto;
+        width: 340px;
+    }
+
+    #booking-img {
+        position: relative;
+        width: 340px;
+        height: 256px;
+    }
+
+    #booking-img>img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    #booking-info {
+        margin-bottom: 65px;
+    }
+
+    #booking-info-title {
+        margin: 7px 0px 30px 0px;
+    }
+
+    #booking-delete {
+        top: 551px;
+        right: 10px;
+    }
+
+    hr {
+        width: min(1200px, 100% - 20px);
+        margin: 40px auto 44px auto;
+        
+    }
+
+    #contact-wrapper,
+    #payment-wrapper {
+        width: 340px;
+        margin: 0px auto 0px auto;
+    }
+
+    #contact-notes {
+        line-height: 23px;
+    }
+
+    #booking-confirm {
+        width: 340px;
+        margin-right: calc(50% - 490px);
+    }
+}

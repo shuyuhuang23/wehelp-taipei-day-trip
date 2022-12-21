@@ -1,0 +1,11 @@
+class Config:
+    """Set Flask config variables."""
+
+    SECRET_KEY = 'XXXXX'
+    COOKIE_EXPIRE_TIME = 60 * 60 * 24 * 7
+
+    # Database
+    MYSQL_USER = 'XXX'
+    MYSQL_PASSWORD = 'XXX'
+    MYSQL_HOST = 'XXX'
+    MYSQL_DATABASE = 'XXX'

@@ -7,9 +7,9 @@
     function chooseTime() {
         let tourDivSpan = document.getElementById("profile-content-tour").getElementsByTagName('span')[0];
         if (document.getElementById('time-am').checked) {
-            tourDivSpan.textContent = '新台幣 2000 元';
+            tourDivSpan.innerText = '2000';
         } else if (document.getElementById('time-pm').checked) {
-            tourDivSpan.textContent = '新台幣 2500 元';
+            tourDivSpan.innerText = '2500';
         }
     }
 
@@ -41,15 +41,16 @@
             </div>
             <div id="profile-content-time">
                 <div id="profile-content-time-title">選擇時間：</div>
-                <input type="radio" value="am" name='time' id='time-am' onclick="chooseTime();" checked />
+                <input type="radio" value="morning" name='time' id='time-am' onclick="chooseTime();" checked />
                 <label for="am">上半天</label>
-                <input type="radio" value="pm" name='time' id='time-pm' onclick="chooseTime();" />
+                <input type="radio" value="afternoon" name='time' id='time-pm' onclick="chooseTime();" />
                 <label for="pm">下半天</label>
             </div>
-            <div id="profile-content-tour">導覽費用：<span>新台幣 2000 元</span></div>
+            <div id="profile-content-tour">導覽費用：新台幣 <span>2000</span> 元</div>
             <div id="profile-content-btn">
                 <div>開始預約行程</div>
             </div>
+            <div id="profile-content-msg"></div>
         </div>
     </div>
 </div>

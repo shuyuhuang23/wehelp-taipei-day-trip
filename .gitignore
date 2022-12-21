@@ -141,8 +141,7 @@ cython_debug/
 guidance/
 
 # config
-config/mysqldb.py
-config/config.py
+config.py
 
 # Editor directories and files
 .DS_Store

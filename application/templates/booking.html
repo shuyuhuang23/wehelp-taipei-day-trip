@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block head_script %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/booking.css') }}" />
+<script defer src="{{ url_for('static', filename='js/booking.js') }}"></script>
+
+{% endblock %}
+{% block body %}
+<div id="headline">您好，<span></span>，待預定的行程如下：</div>
+<div id="booking-wrapper">
+    <div id="booking-img">
+        <img
+            src="https://www.travel.taipei/d_upload_ttn/sceneadmin/image/A0/B0/C0/D7/E150/F719/71eb4b56-f771-43bc-856c-2fb265a5cc6e.jpg">
+    </div>
+    <div id="booking-info">
+        <div id="booking-info-title">台北一日遊：<span></span></div>
+        <div class="booking-info-detail" id="booking-info-date">日期：<span></span></div>
+        <div class="booking-info-detail" id="booking-info-time">時間：<span></span></div>
+        <div class="booking-info-detail" id="booking-info-price">費用：新台幣 <span>0</span> 元</div>
+        <div class="booking-info-detail" id="booking-info-address">地點：<span></span></div>
+    </div>
+    <div id="booking-delete">
+        <img src="{{ url_for('static', filename='images/icon_delete.png') }}">
+    </div>
+</div>
+<hr>
+<div id="contact-wrapper">
+    <div id="contact-title">您的聯絡資訊</div>
+    <div class="contact-form-label">聯絡姓名：
+        <input type="text" class="contact-form" id="contact-name" placeholder="" required>
+    </div>
+    <div class="contact-form-label">聯絡信箱：
+        <input type="email" class="contact-form" id="contact-email" placeholder="" required>
+    </div>
+    <div class="contact-form-label">手機號碼：
+        <input type="text" class="contact-form" id="contact-phone" placeholder="" required>
+    </div>
+    <div id="contact-notes">
+        請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
+    </div>
+</div>
+<hr>
+<div id="payment-wrapper">
+    <div id="payment-title">信用卡付款資訊</div>
+    <div class="payment-form-label">卡片號碼：
+        <input type="text" class="payment-form" id="payment-card" placeholder="**** **** **** ****" required>
+    </div>
+    <div class="payment-form-label">過期時間：
+        <div id="payment-expire-wrapper">
+            <input autocomplete="off" class="payment-form-expire" id="payment-expire-month" maxlength="2" pattern="[0-9]*" inputmode="numerical"
+                placeholder="MM" type="text"/>
+            <div>/</div>
+            <input autocomplete="off" class="payment-form-expire" id="payment-expire-year" maxlength="2" pattern="[0-9]*" inputmode="numerical"
+                placeholder="YY" type="text"/>
+        </div>
+    </div>
+   
+    <div class="payment-form-label">驗證密碼：
+        <input type="text" class="payment-form" id="payment-pwd" placeholder="CVV" required>
+    </div>
+</div>
+<hr>
+<div id="booking-confirm">
+    <div id="booking-total-amount">總價：新台幣 <span>0</span> 元</div>
+    <div id="booking-submit">確認訂購並付款</div>
+</div>
+
+{% endblock %}

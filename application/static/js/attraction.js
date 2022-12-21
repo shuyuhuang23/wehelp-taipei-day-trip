@@ -88,6 +88,10 @@ function showAttraction(callback) {
 };
 
 window.addEventListener("load", function (event) {
+    let today = new Date();
+    today = new Date(today.setDate(today.getDate() + 1)).toISOString().split('T')[0];
+    document.getElementById("profile-content-date-input-box").setAttribute('min', today);
+
     identifyAuth()
         .then(() => {
             return showAttraction();
@@ -95,11 +99,57 @@ window.addEventListener("load", function (event) {
 });
 
 document.getElementById('profile-slideshow-prev').addEventListener('click', function (event) {
-    console.log(event.target)
     slideIndex = showSlide(slideIndex - 1);
 });
 
 document.getElementById('profile-slideshow-next').addEventListener('click', function (event) {
-    console.log(event.target)
     slideIndex = showSlide(slideIndex + 1);
 });
+
+document.getElementById('profile-content-btn').addEventListener('click', function (event) {
+    identifyAuth().then((user) => {
+        // not log in
+        if (Object.keys(user['data']).length === 0) {
+            let loginDiv = document.getElementById('login-container');
+            loginDiv.style.display = 'block';
+            return
+        }
+
+        let date = document.getElementById('profile-content-date-input-box').value;
+        let time = Array.from(document.getElementsByName("time")).find(r => r.checked).value
+        let price = document.getElementById('profile-content-tour').getElementsByTagName('span')[0].innerText;
+
+        if (date === '') {
+            document.getElementById('profile-content-msg').innerText = '日期為必填欄位';
+            return
+        }
+
+        let currentDate = new Date();
+        let bookingDate = new Date(date);
+
+        if (currentDate >=  bookingDate) {
+            document.getElementById('profile-content-msg').innerText = '僅開放明天之後的日期';
+            return 
+        }
+
+        let data = {
+            attractionId,
+            date,
+            time,
+            price
+        }
+        
+        fetch(`${baseURL}/api/booking`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                window.location.href = `${baseURL}/booking`;
+            })
+            .catch(err => console.log(err));
+
+    })
+})

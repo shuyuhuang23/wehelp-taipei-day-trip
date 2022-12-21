@@ -36,7 +36,7 @@ body {
     color: #448899;
     width: 150px;
     height: 34px;
-    /* padding-left: 12px; */
+    margin-left: 10px;
 }
 
 #navbar-menu {
@@ -52,6 +52,7 @@ body {
     margin: 0px 10px;
 }
 
+#navbar-booking,
 #navbar-login {
     cursor: pointer;
 }
@@ -646,7 +647,8 @@ body {
     }
 
     #footer {
-        display: none;
+        margin-top: 62px;
+        height: 24px;
     }
 
 }

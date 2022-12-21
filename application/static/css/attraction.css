@@ -213,6 +213,16 @@ input[type='radio']:checked {
     cursor: pointer;
 }
 
+#profile-content-msg {
+    /* position: absolute; */
+    /* top: 226px; */
+    /* left: 15px; */
+    margin: 5px 0px 0px 20px;
+    font-size: 10px;
+
+    color: red;
+}
+
 #profile-content-btn>div {
 
     width: 114px;
