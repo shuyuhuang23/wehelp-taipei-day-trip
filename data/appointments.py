@@ -3,14 +3,14 @@ import sys
 import mysql.connector
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.join(BASE_PATH, 'config'))
-import mysqldb
+sys.path.append(os.path.join(BASE_PATH))
+from config import Config
 
 with mysql.connector.connect(
-    user = mysqldb.user, 
-    password = mysqldb.password,
-    host = mysqldb.host,
-    database = mysqldb.database
+    user = Config.MYSQL_USER, 
+    password = Config.MYSQL_PASSWORD,
+    host = Config.MYSQL_HOST,
+    database = Config.MYSQL_DATABASE
 ) as connection:
     create_db_query = '''
         CREATE TABLE IF NOT EXISTS appointments (
