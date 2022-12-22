@@ -5,8 +5,8 @@ import json
 import mysql.connector
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.join(BASE_PATH, 'config'))
-import mysqldb
+sys.path.append(os.path.join(BASE_PATH))
+from config import Config
 
 def extract_img_str(raw_str):
     lst_str = re.findall(r'(http.*?(.jpg|.JPG|.png|.PNG))', raw_str)
@@ -22,10 +22,10 @@ val = [(item['_id'], item['rate'], item['direction'], item['name'], item['date']
         item['MEMO_TIME'], extract_img_str(item['file']), item['description'], item['address']) for item in data]
 
 with mysql.connector.connect(
-    user = mysqldb.user, 
-    password = mysqldb.password,
-    host = mysqldb.host,
-    database = mysqldb.database
+    user = Config.MYSQL_USER,
+    password = Config.MYSQL_PASSWORD,
+    host = Config.MYSQL_HOST,
+    database = Config.MYSQL_DATABASE
 ) as connection:
     create_db_query = '''
         CREATE TABLE IF NOT EXISTS attractions (

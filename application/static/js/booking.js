@@ -21,10 +21,20 @@ function loadBooking() {
         .then((response) => response.json())
         .then((result) => {
             if (Object.keys(result['data']).length === 0) {
-
+                document.getElementById('headline').innerText = '沒有任何預約';
+                document.getElementById('booking-wrapper').style.display = 'none';
+                document.getElementById('contact-wrapper').style.display = 'none';
+                document.getElementById('payment-wrapper').style.display = 'none';
+                document.getElementById('booking-confirm').style.display = 'none';
+                document.querySelectorAll('hr').forEach(element => {
+                    console.log(element)
+                    element.style.display = 'none'
+                });
                 return
             }
             let data = result['data'];
+            console.log(data)
+            document.getElementById('booking-img').getElementsByTagName('img')[0].src = data['attraction']['image'];
             document.getElementById('booking-info-title').getElementsByTagName('span')[0].innerText = data['attraction']['name'];
             document.getElementById('booking-info-date').getElementsByTagName('span')[0].innerText = data['date'];
 
@@ -35,7 +45,6 @@ function loadBooking() {
                 bookingTime = '早上 9 點到早上 11 點';
             }
             document.getElementById('booking-info-time').getElementsByTagName('span')[0].innerText = bookingTime;
-
             document.getElementById('booking-info-price').getElementsByTagName('span')[0].innerText = data['price'];
             document.getElementById('booking-info-address').getElementsByTagName('span')[0].innerText = data['attraction']['address'];
             document.getElementById('booking-total-amount').getElementsByTagName('span')[0].innerText = data['price'];
