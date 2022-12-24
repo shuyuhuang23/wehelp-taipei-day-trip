@@ -29,6 +29,17 @@ function resetForm() {
     document.getElementById('register-msg').innerText = '';
 };
 
+document.getElementById('navbar-booking').addEventListener('click', function(event) {
+    identifyAuth().then((data) => {
+        if ('email' in data['data']) {
+            window.location.href = `${baseURL}/booking`;
+        } else {
+            let loginDiv = document.getElementById('login-container');
+            loginDiv.style.display = 'block';
+        }
+    })
+})
+
 document.getElementById('navbar-login').addEventListener('click', function (event) {
     identifyAuth().then((data) => {
         if ('email' in data['data']) {
@@ -37,7 +48,6 @@ document.getElementById('navbar-login').addEventListener('click', function (even
                 .catch(err => console.log(err));
         } else {
             let loginDiv = document.getElementById('login-container');
-            console.log(loginDiv)
             loginDiv.style.display = 'block';
         }
     })
