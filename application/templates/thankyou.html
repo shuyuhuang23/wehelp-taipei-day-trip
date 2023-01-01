@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block head_script %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/thankyou.css') }}" />
+<script defer src="{{ url_for('static', filename='js/thankyou.js') }}"></script>
+{% endblock %}
+{% block body %}
+<div id="order-wrapper">
+    {{result}}
+</div>
+{% endblock %}

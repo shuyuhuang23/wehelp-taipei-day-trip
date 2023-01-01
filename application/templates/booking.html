@@ -2,10 +2,11 @@
 {% block head_script %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/booking.css') }}" />
 <script defer src="{{ url_for('static', filename='js/booking.js') }}"></script>
-
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
 {% endblock %}
 {% block body %}
 <div id="headline">您好，<span></span>，待預定的行程如下：</div>
+<div id="no-booking">目前沒有任何待預訂的行程</div>
 <div id="booking-wrapper">
     <div id="booking-img">
         <img>
@@ -40,22 +41,33 @@
 <hr>
 <div id="payment-wrapper">
     <div id="payment-title">信用卡付款資訊</div>
-    <div class="payment-form-label">卡片號碼：
+    <!-- <div class="payment-form-label">卡片號碼：
         <input type="text" class="payment-form" id="payment-card" placeholder="**** **** **** ****" required>
     </div>
     <div class="payment-form-label">過期時間：
         <div id="payment-expire-wrapper">
-            <input autocomplete="off" class="payment-form-expire" id="payment-expire-month" maxlength="2" pattern="[0-9]*" inputmode="numerical"
-                placeholder="MM" type="text"/>
+            <input autocomplete="off" class="payment-form-expire" id="payment-expire-month" maxlength="2"
+                pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" />
             <div>/</div>
-            <input autocomplete="off" class="payment-form-expire" id="payment-expire-year" maxlength="2" pattern="[0-9]*" inputmode="numerical"
-                placeholder="YY" type="text"/>
+            <input autocomplete="off" class="payment-form-expire" id="payment-expire-year" maxlength="2"
+                pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" />
         </div>
     </div>
-   
+
     <div class="payment-form-label">驗證密碼：
         <input type="text" class="payment-form" id="payment-pwd" placeholder="CVV" required>
-    </div>
+    </div> -->
+
+    <label class="payment-form-label">卡片號碼：
+        <div class="tpfield" id="card-number"></div>
+    </label>
+    <label class="payment-form-label">過期時間：
+        <div class="tpfield" id="card-expiration-date"></div>
+    </label>
+    <label class="payment-form-label">驗證密碼：
+    <div class="tpfield" id="card-ccv"></div>
+    </label>
+
 </div>
 <hr>
 <div id="booking-confirm">

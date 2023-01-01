@@ -8,7 +8,21 @@
     color: #666666;
 }
 
+#no-booking {
+    margin: 35px 0px 0px calc(50% - 400px);
+
+    /* display: none; */
+    visibility: hidden;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #666666;
+}
+
 #booking-wrapper {
+    visibility: hidden;
     display: flex;
     margin: 35px 0px 0px calc(50% - 400px);
 }
@@ -57,6 +71,7 @@
 
 hr {
     /* width: 1200px; */
+    visibility: hidden;
     width: min(1200px, 100% - 20px);
     margin: 40px auto 44px auto;
     border: 1px solid #E8E8E8;
@@ -64,6 +79,7 @@ hr {
 
 #contact-wrapper,
 #payment-wrapper {
+    visibility: hidden;
     margin-left: calc(50% - 400px);
 }
 
@@ -143,7 +159,24 @@ hr {
     color: #666666;
 }
 
+.tpfield {
+    height: 18px;
+    width: 180px;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    background: #FFFFFF;
+    padding: 10px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+
+    color: #666666;
+}
+
 #booking-confirm {
+    visibility: hidden;
+
     margin-right: calc(50% - 490px);
 
     display: flex;
@@ -175,12 +208,15 @@ hr {
     line-height: 16px;
 
     color: #FFFFFF;
+
+    cursor: pointer;
 }
 
 @media (max-width: 1000px) {
     #booking-delete {
         right: 10px;
     }
+
     #booking-confirm {
         margin-right: 10px;
     }
@@ -189,6 +225,11 @@ hr {
 
 @media (max-width: 830px) {
     #headline {
+        width: 340px;
+        margin: 46px auto 0px auto;
+    }
+
+    #no-booking {
         width: 340px;
         margin: 46px auto 0px auto;
     }
@@ -235,9 +276,11 @@ hr {
     }
 
     hr {
+        visibility: hidden;
+        
         width: min(1200px, 100% - 20px);
         margin: 40px auto 44px auto;
-        
+
     }
 
     #contact-wrapper,
