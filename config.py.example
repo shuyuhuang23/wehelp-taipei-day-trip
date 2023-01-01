@@ -9,3 +9,8 @@ class Config:
     MYSQL_PASSWORD = 'XXX'
     MYSQL_HOST = 'XXX'
     MYSQL_DATABASE = 'XXX'
+
+    # tapapi
+    PAY_URL = 'XXX'
+    PARTNER_KEY = 'XXX'
+    MERCHANT_ID = 'XXX'

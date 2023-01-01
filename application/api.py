@@ -3,6 +3,7 @@ from flask import request
 from flask import make_response
 from flask import current_app
 import jwt
+import requests
 
 from application import mysql_db
 
@@ -42,6 +43,7 @@ def identify_auth(request):
         return {"data": {},
                 "message": "伺服器內部錯誤" + str(err)}
 
+
 def delete_booking(user_id):
     delete_db_query = '''
         DELETE FROM appointments
@@ -53,6 +55,7 @@ def delete_booking(user_id):
         cursor.execute(delete_db_query, params)
         mysql_db.cnn.commit()
     return
+
 
 @api_bp.route("/user", methods=['POST'])
 def register():
@@ -327,10 +330,8 @@ def create_appointment():
                     "message": "未登入系統，拒絕存取"
                 }, 403
 
-        
-
             user_id = user_info['data']['id']
-            attraction_id = request.json['attractionId']           
+            attraction_id = request.json['attractionId']
             date = request.json['date']
             time = request.json['time']
             price = request.json['price']
@@ -348,13 +349,11 @@ def create_appointment():
             ) VALUES (%(user_id)s, %(attraction_id)s, %(date)s, %(time)s, %(price)s)
             '''
             params = {'user_id': user_id, 'attraction_id': attraction_id,
-                        'date': date, 'time': time, 'price': price}
+                      'date': date, 'time': time, 'price': price}
 
             with mysql_db.cnn.cursor() as cursor:
                 cursor.execute(insert_db_query, params)
                 mysql_db.cnn.commit()
-            print('insert')
-            
 
             return {"ok": True}
         except Exception as err:
@@ -362,7 +361,7 @@ def create_appointment():
                 "error": True,
                 "message": "伺服器內部錯誤" + str(err)
             }, 500
-            
+
     if request.method == 'DELETE':
         try:
             user_info = identify_auth(request)
@@ -376,7 +375,7 @@ def create_appointment():
             user_id = user_info['data']['id']
 
             delete_booking(user_id)
-        
+
             return {"ok": True}
         except Exception as err:
             return {
@@ -384,3 +383,178 @@ def create_appointment():
                 "message": "伺服器內部錯誤" + str(err)
             }, 500
 
+
+@api_bp.route("/order/<order_number>")
+def order_info(order_number):
+    try:
+        user_info = identify_auth(request)
+
+        if len(user_info) == 0:
+            return {
+                "error": True,
+                "message": "未登入系統，拒絕存取"
+            }, 403
+
+        select_db_query = '''
+        SELECT * FROM orders
+        WHERE number = %(order_number)s
+        '''
+
+        params = {'order_number': order_number}
+
+        with mysql_db.cnn.cursor() as cursor:
+            cursor.execute(select_db_query, params)
+            result = cursor.fetchone()
+
+        if result is None:
+            return {"data": {}}
+        else:
+            return {"data": {
+                "number": order_number,
+                "price": result[1],
+                "trip": {
+                    "attraction": {
+                        "id": result[6],
+                        "name": result[7],
+                        "address": result[8],
+                        "image": result[9]
+                    },
+                    "date": result[10].strftime("%Y-%m-%d"),
+                    "time": result[11]
+                },
+                "contact": {
+                "name": result[2],
+                "email": result[3],
+                "phone": result[4]
+                },
+                "status": result[12]
+            }}
+    except Exception as err:
+            return {
+                "error": True,
+                "message": "伺服器內部錯誤" + str(err)
+            }, 500
+
+
+
+
+@api_bp.route("/orders", methods=['POST'])
+def create_order():
+
+    user_info = identify_auth(request)
+
+    if len(user_info) == 0:
+        return {
+            "error": True,
+            "message": "未登入系統，拒絕存取"
+        }, 403
+
+    user_id = user_info['data']['id']
+
+    # url = 'https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime'
+    # PARTNER_KEY = 'partner_bvDf8QbqUoHRuPKultmC2gA8XU4WDMkUH7aCobocr56VSK8MbiGM3nud'
+    # MERCHANT_ID = 'wehelp_ESUN'
+    prime = request.json['prime']
+    user_name = request.json['order']['contact']['name']
+    email = request.json['order']['contact']['email']
+    phone = request.json['order']['contact']['phone']
+    attraction_id = request.json['order']['trip']['attraction']['id']
+    attraction_name = request.json['order']['trip']['attraction']['name']
+    attraction_address = request.json['order']['trip']['attraction']['address']
+    attraction_image = request.json['order']['trip']['attraction']['image']
+    date = request.json['order']['trip']['date']
+    time = request.json['order']['trip']['time']
+    price = request.json['order']['price']
+
+    data = {
+        'prime': prime,
+        'partner_key': config['PARTNER_KEY'],
+        'merchant_id': config['MERCHANT_ID'],
+        'amount': price,
+        "details": "TapPay Test",
+        "cardholder": {
+            "phone_number": phone,
+            "name": user_name,
+            "email": email
+        }
+    }
+    response = requests.post(config['PAY_URL'], json = data, headers = {'x-api-key': config['PARTNER_KEY']}).json()
+
+
+    number = response['rec_trade_id']
+    
+    insert_db_query = '''
+        INSERT INTO orders
+        (
+            number,
+            user_id,
+            user_name,
+            email,
+            phone,
+            price,
+            attraction_id,
+            attraction_name,
+            attraction_address,
+            attraction_image,
+            `date`,
+            time,
+            status
+        ) VALUES (
+            %(number)s, 
+            %(user_id)s, 
+            %(user_name)s, 
+            %(email)s, 
+            %(phone)s, 
+            %(price)s, 
+            %(attraction_id)s, 
+            %(attraction_name)s,
+            %(attraction_address)s,
+            %(attraction_image)s,  
+            %(date)s, 
+            %(time)s,
+             %(status)s)
+        '''
+    params = {'number': number, 
+        'user_id': user_id, 
+        'user_name': user_name,
+        'email': email,
+        'phone': phone,
+        'price': price,
+        'attraction_id': attraction_id,
+        'attraction_name': attraction_name,
+        'attraction_address': attraction_address,
+        'attraction_image': attraction_image,
+        'date': date,
+        'time': time,
+        'status': response['status']
+    }
+
+    with mysql_db.cnn.cursor() as cursor:
+        cursor.execute(insert_db_query, params)
+        mysql_db.cnn.commit()
+
+    if response['status'] == 0:
+        delete_db_query = '''
+        DELETE FROM appointments
+        WHERE user_id = %(user_id)s
+        '''
+        params = {'user_id': user_id}
+
+        with mysql_db.cnn.cursor() as cursor:
+            cursor.execute(delete_db_query, params)
+            mysql_db.cnn.commit()
+
+        return {
+            "data": {
+                "number": response['rec_trade_id'],
+                "payment": {
+                    "status": 0,
+                    "message": "付款成功"
+                }
+            }
+        }
+    else:
+        return {
+            "error": True,
+            "message": response.msg
+        }, 400
